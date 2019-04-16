@@ -10,10 +10,10 @@
     <title> Getting Started: Serving Web Content </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <!--link rel="stylesheet" href="static/css/fontawesome-all.min.css"-->
+    <link rel="stylesheet" href="css/fontawesome-all.min.css">
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/main.js"></script>
@@ -94,6 +94,20 @@
 
 </head>
 <body>
+<div role="navigation">
+    <div class="navbar navbar-inverse">
+        <a href="/welcome" class="navbar-brand">Tecno-Tab</a>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Login</a></li>
+                <li><a href="#">New Registration</a></li>
+                <li><a href="#">All Users</a></li>
+                <li><a href="#">Bachelor</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 <h1 th:text="'Hello my Friend , ' + ${name} + '!'"/>
 <section id="logosection">
     <img class="logo" src="images/sudoku.png"/>

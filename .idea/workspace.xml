@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4aef8604-028b-4882-8a6a-58ec1cdc57df" name="Default Changelist" comment="" />
+    <list default="true" id="4aef8604-028b-4882-8a6a-58ec1cdc57df" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/greeting.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/greeting.html" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -10,13 +14,36 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/greeting.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2264">
-              <caret line="18" column="37" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+            <state relative-caret-position="81">
+              <caret line="101" column="32" selection-start-line="101" selection-start-column="32" selection-end-line="101" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="496">
+              <caret line="141" column="4" selection-start-line="141" selection-start-column="4" selection-end-line="141" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -25,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="161">
-              <caret line="7" column="21" lean-forward="true" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+              <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -44,6 +71,9 @@
       <find>ima</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -56,8 +86,8 @@
         <option value="$PROJECT_DIR$/src/main/java/hello/controller/sudokuController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/static/js/main.js" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/main.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/greeting.html" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/style.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/greeting.html" />
       </list>
     </option>
   </component>
@@ -74,6 +104,7 @@
     <option name="width" value="1530" />
     <option name="height" value="980" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -186,7 +217,8 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555447760227" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555452355869" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../myApplicationSpringBoot" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -236,17 +268,18 @@
       <workItem from="1555434769037" duration="5525000" />
       <workItem from="1555442389196" duration="713000" />
       <workItem from="1555443120639" duration="1840000" />
-      <workItem from="1555447785331" duration="2181000" />
+      <workItem from="1555447785331" duration="4466000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12139000" />
+    <option name="totallyTimeSpent" value="14424000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18724832" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18724832" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -256,7 +289,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.16983895" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.48316252" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -285,6 +318,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pom.xml">
@@ -329,13 +366,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/main.css" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/sudokuberlogo.png" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/sudoku.png">
       <provider selected="true" editor-type-id="images" />
@@ -343,14 +373,21 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
-          <caret line="7" column="21" lean-forward="true" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="141" column="4" selection-start-line="141" selection-start-column="4" selection-end-line="141" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/greeting.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2264">
-          <caret line="18" column="37" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+        <state relative-caret-position="81">
+          <caret line="101" column="32" selection-start-line="101" selection-start-column="32" selection-end-line="101" selection-end-column="32" />
         </state>
       </provider>
     </entry>
