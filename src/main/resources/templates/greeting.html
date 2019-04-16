@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+
+    <title> Getting Started: Serving Web Content </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!--link rel="stylesheet" href="static/css/fontawesome-all.min.css"-->
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/main.js"></script>
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        var puzzle;
+        var selectedTile;
+        $(document).ready(function () {
+
+            start();
+            $("#newGame").click(function () {
+                init();
+            });
+            $("#grid").fadeIn(900);
+            $("#myOwn").click(function () {
+                initMyOwn();
+            });
+        });
+
+        function start() {
+            puzzle = new generateMyOwn();
+            for (var i = 0; i < 9; i++) {
+                for (var j = 0; j < 9; j++) {
+                    var tile = document.getElementById("t" + i + "x" + j);
+                    if (puzzle.getTileNumber(i, j) === 0) {
+                        tile.className = "emptyCell";
+                        tile.innerHTML = "";
+                        tile.onclick = tOnClick;
+                    } else {
+                        tile.className = "cell";
+                        tile.innerHTML = puzzle.getTileNumber(i, j);
+                    }
+                }
+            }
+        }
+
+        function init() {
+            puzzle = new generateSudoku();
+
+            for (var i = 0; i < 9; i++) {
+                for (var j = 0; j < 9; j++) {
+                    var tile = document.getElementById("t" + i + "x" + j);
+                    if (puzzle.getTileNumber(i, j) === 0) {
+                        tile.className = "emptyCell";
+                        tile.innerHTML = "";
+                        tile.style.backgroundColor = "#FFFFFF";
+                        tile.onclick = tOnClick;
+                    } else {
+                        tile.style.backgroundColor = "#33FFD5";
+                        tile.className = "cell";
+                        tile.innerHTML = puzzle.getTileNumber(i, j);
+                    }
+                }
+            }
+        }
+
+        function tOnClick() {
+            if (selectedTile == null) {
+                selectedTile = this;
+                selectedTile.className = "emptyCell selected";
+            } else {
+                deselect();
+            }
+        }
+
+        function deselect() {
+            selectedTile.className = "emptyCell";
+            selectedTile = null;
+        }
+
+        function initMyOwn() {
+            location.reload();
+        }
+    </script>
+
+</head>
+<body>
+<h1 th:text="'Hello my Friend , ' + ${name} + '!'"/>
+<section id="logosection">
+    <img class="logo" src="images/sudoku.png"/>
+</section>
+<section id="sudokuPuzzle">
+    <form id="formwrapper">
+
+        <span id="newGame" class="formbutton"> Gave me another</span> <!--//  onclick="myFunction()" -->
+        <span id="myOwn" class="formbutton">Enter my Own</span>
+    </form>
+    <table class="inner container" align="center" id="grid">
+        <tr>
+            <td id='t0x0'></td>
+            <td id='t0x1'></td>
+            <td id='t0x2'></td>
+            <td id='t0x3'></td>
+            <td id='t0x4'></td>
+            <td id='t0x5'></td>
+            <td id='t0x6'></td>
+            <td id='t0x7'></td>
+            <td id='t0x8'></td>
+        </tr>
+        <tr>
+            <td id='t1x0'></td>
+            <td id='t1x1'></td>
+            <td id='t1x2'></td>
+            <td id='t1x3'></td>
+            <td id='t1x4'></td>
+            <td id='t1x5'></td>
+            <td id='t1x6'></td>
+            <td id='t1x7'></td>
+            <td id='t1x8'></td>
+        </tr>
+        <tr>
+            <td id='t2x0'></td>
+            <td id='t2x1'></td>
+            <td id='t2x2'></td>
+            <td id='t2x3'></td>
+            <td id='t2x4'></td>
+            <td id='t2x5'></td>
+            <td id='t2x6'></td>
+            <td id='t2x7'></td>
+            <td id='t2x8'></td>
+        </tr>
+        <tr>
+            <td id='t3x0'></td>
+            <td id='t3x1'></td>
+            <td id='t3x2'></td>
+            <td id='t3x3'></td>
+            <td id='t3x4'></td>
+            <td id='t3x5'></td>
+            <td id='t3x6'></td>
+            <td id='t3x7'></td>
+            <td id='t3x8'></td>
+        </tr>
+        <tr>
+            <td id='t4x0'></td>
+            <td id='t4x1'></td>
+            <td id='t4x2'></td>
+            <td id='t4x3'></td>
+            <td id='t4x4'></td>
+            <td id='t4x5'></td>
+            <td id='t4x6'></td>
+            <td id='t4x7'></td>
+            <td id='t4x8'></td>
+        </tr>
+        <tr>
+            <td id='t5x0'></td>
+            <td id='t5x1'></td>
+            <td id='t5x2'></td>
+            <td id='t5x3'></td>
+            <td id='t5x4'></td>
+            <td id='t5x5'></td>
+            <td id='t5x6'></td>
+            <td id='t5x7'></td>
+            <td id='t5x8'></td>
+        </tr>
+        <tr>
+            <td id='t6x0'></td>
+            <td id='t6x1'></td>
+            <td id='t6x2'></td>
+            <td id='t6x3'></td>
+            <td id='t6x4'></td>
+            <td id='t6x5'></td>
+            <td id='t6x6'></td>
+            <td id='t6x7'></td>
+            <td id='t6x8'></td>
+        </tr>
+        <tr>
+            <td id='t7x0'></td>
+            <td id='t7x1'></td>
+            <td id='t7x2'></td>
+            <td id='t7x3'></td>
+            <td id='t7x4'></td>
+            <td id='t7x5'></td>
+            <td id='t7x6'></td>
+            <td id='t7x7'></td>
+            <td id='t7x8'></td>
+        </tr>
+        <tr>
+            <td id='t8x0'></td>
+            <td id='t8x1'></td>
+            <td id='t8x2'></td>
+            <td id='t8x3'></td>
+            <td id='t8x4'></td>
+            <td id='t8x5'></td>
+            <td id='t8x6'></td>
+            <td id='t8x7'></td>
+            <td id='t8x8'></td>
+        </tr>
+    </table>
+</section>
+
+
+</body>
+</html>
