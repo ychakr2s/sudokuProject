@@ -2,31 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
-
     <title> Getting Started: Serving Web Content </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <!--link rel="stylesheet" href="static/css/fontawesome-all.min.css"-->
+    <!--<link rel="stylesheet" href="static/css/fontawesome-all.min.css">-->
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/main.js"></script>
     <script src="js/jquery-1.11.2.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <!--<script src="js/bootstrap.min.js"></script>-->
 
     <script language="javascript" type="text/javascript">
-
         var puzzle;
         var selectedTile;
+        var matrix = [];
+        var myMatrix=[];
         $(document).ready(function () {
-
-            start();
+            //var myJSON = JSON.stringify(myArray());
+            init(); //444
+            // searchViaAjax(myJSON);
+            // myFunction();
             $("#newGame").click(function () {
                 init();
             });
@@ -34,40 +32,74 @@
             $("#myOwn").click(function () {
                 initMyOwn();
             });
+            $("#finished").click(function () {
+                readTableToSend();
+                sendArrayToJava();
+             //   generate_table();
+            });
+
+            console.log("Salam i am from Ready jQuery: ", matrix);
         });
 
-        function start() {
+        function ownInput() {
             puzzle = new generateMyOwn();
+
             for (var i = 0; i < 9; i++) {
+                //   matrix[i] = [];
                 for (var j = 0; j < 9; j++) {
                     var tile = document.getElementById("t" + i + "x" + j);
+                    //  matrix[i][j] = puzzle.getTileNumber(i, j);
                     if (puzzle.getTileNumber(i, j) === 0) {
                         tile.className = "emptyCell";
-                        tile.innerHTML = "";
+                        tile.value = "";
+                        tile.style.backgroundColor = "#FFFFFF";
+                        tile.disabled = false;
                         tile.onclick = tOnClick;
                     } else {
                         tile.className = "cell";
-                        tile.innerHTML = puzzle.getTileNumber(i, j);
+                        tile.value = puzzle.getTileNumber(i, j);
+                        //	tile.disabled = true;
                     }
+                }
+            }
+        }
+
+        function readTableToSend() {
+            for (var i = 0; i < 9; i++) {
+                matrix[i] = [];
+                for (var j = 0; j < 9; j++) {
+                    var tile = document.getElementById("t" + i + "x" + j);
+                    if (tile == "") {
+                        matrix[i][j] = 0;
+                    } else {
+                        matrix[i][j] = tile.value;
+                    }
+
                 }
             }
         }
 
         function init() {
             puzzle = new generateSudoku();
+            // matrix = puzzle;
+            console.log("I AM THE MATRIX: ", matrix);
 
             for (var i = 0; i < 9; i++) {
+                //  matrix[i] = [];
                 for (var j = 0; j < 9; j++) {
                     var tile = document.getElementById("t" + i + "x" + j);
+                    // matrix[i][j] = puzzle.getTileNumber(i, j);
                     if (puzzle.getTileNumber(i, j) === 0) {
-                        tile.className = "emptyCell";
-                        tile.innerHTML = "";
+                        tile.className = "cell";
+                        tile.value = "";
                         tile.style.backgroundColor = "#FFFFFF";
-                        // tile.onclick = tOnClick;
+                        tile.disabled = true;
+                        tile.onclick = tOnClick;
                     } else {
                         tile.style.backgroundColor = "#33FFD5";
                         tile.className = "cell";
-                        tile.innerHTML = puzzle.getTileNumber(i, j);
+                        tile.value = puzzle.getTileNumber(i, j);
+                        tile.disabled = true;
                     }
                 }
             }
@@ -88,139 +120,246 @@
         }
 
         function initMyOwn() {
-            location.reload();
+            ownInput();
         }
+
+        function convertMarixToArray() {
+            var myArray = Array(81);
+            var count = 0;
+            for (var i = 0; i < 9; i++) {
+                for (var j = 0; j < 9; j++) {
+                    myArray[count] = matrix[i][j];
+                    count++;
+                }
+            }
+            return myArray;
+        }
+
+        function convertArrayToMatrix(array) {
+
+            var count = 0;
+            for (var i = 0; i < 9; i++) {
+                myMatrix[i] = [];
+                for (var j = 0; j < 9; j++) {
+                    myMatrix[i][j] = array[count];
+                    count++;
+
+                }
+            }
+            return myMatrix;
+        }
+
+        function sendArrayToJava() {
+            //var tempId = id;
+            var dataArrayToSend = convertMarixToArray();
+            $.ajax({
+                contentType: "application/json",
+                type: "POST",
+                data: JSON.stringify(dataArrayToSend),
+                url: "/appUrl",
+                success: function (data) {
+                    console.log('done');
+
+                    console.log("my data ", convertArrayToMatrix(data));
+                    // alert("Salam: "+convertArrayToMatrix(data));
+                     generate_table(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('error while post');
+                }
+
+            });
+
+        }
+
+        function generate_table(array) {
+            // get the reference for the body
+            var matrixx = convertArrayToMatrix(array);
+            var body = document.getElementsByTagName("body")[0];
+
+            // creates a <table> element and a <tbody> element
+             var tbl = document.createElement("table");
+
+            var tblBody = document.createElement("tbody");
+
+            // creating all cells
+            for (var i = 0; i < 9; i++) {
+                // creates a table row
+                var row = document.createElement("tr");
+                for (var j = 0; j < 9; j++) {
+                    // Create a <td> element and a text node, make the text
+                    // node the contents of the <td>, and put the <td> at
+                    // the end of the table row
+                    var cell = document.createElement("td");
+                    var cellText = document.createTextNode(matrixx[i][j]);
+                  //  cell.setAttribute("id", "t"+i+"r"+j);
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+
+                // add the row to the end of the table body
+                tblBody.appendChild(row);
+            }
+
+            // put the <tbody> in the <table>
+            tbl.appendChild(tblBody);
+            // appends <table> into
+            body.appendChild(tbl);
+            // sets the border attribute of tbl to 2;
+            tbl.setAttribute("border", "4px solid #0abb9c");
+            tbl.setAttribute("width", "40%");
+           // tbl.setAttribute("margin-top", "1000000px");
+        }
+
     </script>
 
 </head>
-<body>
-<div role="navigation">
-    <div class="navbar navbar-inverse">
-        <a href="/welcome" class="navbar-brand">Tecno-Tab</a>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">New Registration</a></li>
-                <li><a href="/show-users">All Users</a></li>
-                <li><a href="/bachelor">Bachelor</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
 
-<h1 th:text="'Hello my Friend , ' + ${name} + '!'"/>
+<body>
 <section id="logosection">
     <img class="logo" src="images/sudoku.png"/>
 </section>
 <section id="sudokuPuzzle">
     <form id="formwrapper">
-
         <span id="newGame" class="formbutton"> Gave me another</span> <!--//  onclick="myFunction()" -->
-        <span id="myOwn" class="formbutton">Enter my Own</span>
+        <span id="myOwn" class="formbutton">Enter my Own </span>
     </form>
+
     <table class="inner container" align="center" id="grid">
         <tr>
-            <td id='t0x0'></td>
-            <td id='t0x1'></td>
-            <td id='t0x2'></td>
-            <td id='t0x3'></td>
-            <td id='t0x4'></td>
-            <td id='t0x5'></td>
-            <td id='t0x6'></td>
-            <td id='t0x7'></td>
-            <td id='t0x8'></td>
+            <td id="t0r0"><input id="t0x0" type="text"></td>
+            <td id="t0r1"><input id="t0x1" type="text"></td>
+            <td id="t0r2"><input id="t0x2" type="text"></td>
+
+            <td id="t0r3"><input id="t0x3" type="text"></td>
+            <td id="t0r4"><input id="t0x4" type="text"></td>
+            <td id="t0r5"><input id="t0x5" type="text"></td>
+
+            <td id="t0r6"><input id="t0x6" type="text"></td>
+            <td id="t0r7"><input id="t0x7" type="text"></td>
+            <td id="t0r8"><input id="t0x8" type="text"></td>
         </tr>
+
         <tr>
-            <td id='t1x0'></td>
-            <td id='t1x1'></td>
-            <td id='t1x2'></td>
-            <td id='t1x3'></td>
-            <td id='t1x4'></td>
-            <td id='t1x5'></td>
-            <td id='t1x6'></td>
-            <td id='t1x7'></td>
-            <td id='t1x8'></td>
+            <td id="t1r0"><input id="t1x0" type="text"></td>
+            <td id="t1r1"><input id="t1x1" type="text"></td>
+            <td id="t1r2"><input id="t1x2" type="text"></td>
+
+            <td id="t1r3"><input id="t1x3" type="text"></td>
+            <td id="t1r4"><input id="t1x4" type="text"></td>
+            <td id="t1r5"><input id="t1x5" type="text"></td>
+
+            <td id="t1r6"><input id="t1x6" type="text"></td>
+            <td id="t1r7"><input id="t1x7" type="text"></td>
+            <td id="t1r8"><input id="t1x8" type="text"></td>
         </tr>
+
         <tr>
-            <td id='t2x0'></td>
-            <td id='t2x1'></td>
-            <td id='t2x2'></td>
-            <td id='t2x3'></td>
-            <td id='t2x4'></td>
-            <td id='t2x5'></td>
-            <td id='t2x6'></td>
-            <td id='t2x7'></td>
-            <td id='t2x8'></td>
+            <td id="t2r0"><input id="t2x0" type="text"></td>
+            <td id="t2r1"><input id="t2x1" type="text"></td>
+            <td id="t2r2"><input id="t2x2" type="text"></td>
+
+            <td id="t2r3"><input id="t2x3" type="text"></td>
+            <td id="t2r4"><input id="t2x4" type="text"></td>
+            <td id="t2r5"><input id="t2x5" type="text"></td>
+
+            <td id="t2r6"><input id="t2x6" type="text"></td>
+            <td id="t2r7"><input id="t2x7" type="text"></td>
+            <td id="t2r8"><input id="t2x8" type="text"></td>
         </tr>
+
         <tr>
-            <td id='t3x0'></td>
-            <td id='t3x1'></td>
-            <td id='t3x2'></td>
-            <td id='t3x3'></td>
-            <td id='t3x4'></td>
-            <td id='t3x5'></td>
-            <td id='t3x6'></td>
-            <td id='t3x7'></td>
-            <td id='t3x8'></td>
+            <td id="t3r0"><input id="t3x0" type="text"></td>
+            <td id="t3r1"><input id="t3x1" type="text"></td>
+            <td id="t3r2"><input id="t3x2" type="text"></td>
+
+            <td id="t3r3"><input id="t3x3" type="text"></td>
+            <td id="t3r4"><input id="t3x4" type="text"></td>
+            <td id="t3r5"><input id="t3x5" type="text"></td>
+
+            <td id="t3r6"><input id="t3x6" type="text"></td>
+            <td id="t3r7"><input id="t3x7" type="text"></td>
+            <td id="t3r8"><input id="t3x8" type="text"></td>
         </tr>
+
         <tr>
-            <td id='t4x0'></td>
-            <td id='t4x1'></td>
-            <td id='t4x2'></td>
-            <td id='t4x3'></td>
-            <td id='t4x4'></td>
-            <td id='t4x5'></td>
-            <td id='t4x6'></td>
-            <td id='t4x7'></td>
-            <td id='t4x8'></td>
+            <td id="t4r0"><input id="t4x0" type="text"></td>
+            <td id="t4r1"><input id="t4x1" type="text"></td>
+            <td id="t4r2"><input id="t4x2" type="text"></td>
+
+            <td id="t4r3"><input id="t4x3" type="text"></td>
+            <td id="t4r4"><input id="t4x4" type="text"></td>
+            <td id="t4r5"><input id="t4x5" type="text"></td>
+
+            <td id="t4r6"><input id="t4x6" type="text"></td>
+            <td id="t4r7"><input id="t4x7" type="text"></td>
+            <td id="t4r8"><input id="t4x8" type="text"></td>
         </tr>
+
         <tr>
-            <td id='t5x0'></td>
-            <td id='t5x1'></td>
-            <td id='t5x2'></td>
-            <td id='t5x3'></td>
-            <td id='t5x4'></td>
-            <td id='t5x5'></td>
-            <td id='t5x6'></td>
-            <td id='t5x7'></td>
-            <td id='t5x8'></td>
+            <td id="t5r0"><input id="t5x0" type="text"></td>
+            <td id="t5r1"><input id="t5x1" type="text"></td>
+            <td id="t5r2"><input id="t5x2" type="text"></td>
+
+            <td id="t5r3"><input id="t5x3" type="text"></td>
+            <td id="t5r4"><input id="t5x4" type="text"></td>
+            <td id="t5r5"><input id="t5x5" type="text"></td>
+
+            <td id="t5r6"><input id="t5x6" type="text"></td>
+            <td id="t5r7"><input id="t5x7" type="text"></td>
+            <td id="t5r8"><input id="t5x8" type="text"></td>
         </tr>
+
         <tr>
-            <td id='t6x0'></td>
-            <td id='t6x1'></td>
-            <td id='t6x2'></td>
-            <td id='t6x3'></td>
-            <td id='t6x4'></td>
-            <td id='t6x5'></td>
-            <td id='t6x6'></td>
-            <td id='t6x7'></td>
-            <td id='t6x8'></td>
+            <td><input id="t6x0" type="text"></td>
+            <td><input id="t6x1" type="text"></td>
+            <td id="t6r2"><input id="t6x2" type="text"></td>
+
+            <td><input id="t6x3" type="text"></td>
+            <td><input id="t6x4" type="text"></td>
+            <td id="t6r5"><input id="t6x5" type="text"></td>
+
+            <td><input id="t6x6" type="text"></td>
+            <td><input id="t6x7" type="text"></td>
+            <td><input id="t6x8" type="text"></td>
         </tr>
+
         <tr>
-            <td id='t7x0'></td>
-            <td id='t7x1'></td>
-            <td id='t7x2'></td>
-            <td id='t7x3'></td>
-            <td id='t7x4'></td>
-            <td id='t7x5'></td>
-            <td id='t7x6'></td>
-            <td id='t7x7'></td>
-            <td id='t7x8'></td>
+            <td><input id="t7x0" type="text"></td>
+            <td><input id="t7x1" type="text"></td>
+            <td id="t7r2"><input id="t7x2" type="text"></td>
+
+            <td><input id="t7x3" type="text" value="4" disabled></td>
+            <td><input id="t7x4" type="text" value="1" disabled></td>
+            <td id="t7r5"><input id="t7x5" type="text" value="9" disabled></td>
+
+            <td><input id="t7x6" type="text"></td>
+            <td><input id="t7x7" type="text"></td>
+            <td><input id="t7x8" type="text"></td>
         </tr>
+
         <tr>
-            <td id='t8x0'></td>
-            <td id='t8x1'></td>
-            <td id='t8x2'></td>
-            <td id='t8x3'></td>
-            <td id='t8x4'></td>
-            <td id='t8x5'></td>
-            <td id='t8x6'></td>
-            <td id='t8x7'></td>
-            <td id='t8x8'></td>
+            <td><input id="t8x0" type="text"></td>
+            <td><input id="t8x1" type="text"></td>
+            <td id="t8r2"><input id="t8x2" type="text"></td>
+
+            <td><input id="t8x3" type="text"></td>
+            <td><input id="t8x4" type="text"></td>
+            <td id="t8r5"><input id="t8x5" type="text"></td>
+
+            <td><input id="t8x6" type="text"></td>
+            <td><input id="t8x7" type="text"></td>
+            <td><input id="t8x8" type="text"></td>
         </tr>
+
     </table>
+
+    <span id="finished" class="formbutton">Submit</span>
+    <div>
+        <input type="button" class="formbutton" value="Generate a table." onclick="generate_table()">
+    </div>
+
+
 </section>
-
-
 </body>
 </html>

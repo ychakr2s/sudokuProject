@@ -8,8 +8,8 @@ img.logo {
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    width: 30%;
-    height: 10%;
+    width: 550px;
+    height: 180px;
 }
 
 table.container {
@@ -17,54 +17,80 @@ table.container {
     border-spacing: 0;
     border: 4px solid #0abb9c;
     border-collapse: collapse;
-    display: none;
+    /*display: none; */
     color: #686868;
     font-family: Arial, sans-serif;
     font-weight: bold;
     margin-top: 1em;
 }
 
-td.cell {
+/*
+td input.cell{
+	
+	border: 2px dotted #0abb9c;
+	padding: 0;
+	cursor: context-menu;
+	oder td input.emptyCell
+}
+
+td {
+	border: 2px dotted #0abb9c;
+	padding: 0;
+}
+*/
+
+td input.emptyCell {
+    cursor: pointer;
+}
+
+td input {
     border: 2px dotted #0abb9c;
     padding: 0;
     cursor: context-menu;
 }
 
-td.emptyCell {
-    border: 2px dotted #0abb9c;
-    padding: 0;
-    cursor: pointer;
-}
-
-#t0x2, #t0x5, #t1x2, #t1x5, #t2x5,
-#t3x2,#t3x5, #t4x2, #t4x5, #t5x2, #t5x5,
-#t6x2, #t6x5, #t7x2, #t7x5, #t8x2, #t8x5 {
+#t0r2, #t0r5, #t1r2, #t1r5, #t2r5,
+#t3r2, #t3r5, #t4r2, #t4r5, #t5r2, #t5r5,
+#t6r2, #t6r5, #t7r2, #t7r5, #t8r2, #t8r5 {
     border-right: 3px solid #0abb9c;
 }
 
-#t2x0, #t2x1, #t2x3, #t2x4, #t2x6, #t2x7,
-#t5x0, #t5x1, #t5x3, #t5x4, #t5x6, #t5x7 {
+#t2r0, #t2r1, #t2r3, #t2r4, #t2r6, #t2r7, #t2r8,
+#t5r8, #t5r0, #t5r1, #t5r3, #t5r4, #t5r6, #t5r7 {
     border-bottom: 3px solid #0abb9c;
 }
 
-#t2x2, #t2x5, #t2x8, #t5x2, #t5x5, #t5x8 {
+#t2r2, #t2r5, #t5r2, #t5r5 {
     border-bottom: 3px solid #0abb9c;
     border-right: 3px solid #0abb9c;
 }
 
 .inner td {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     text-align: center;
     font-size: 2.0em;
 }
 
 .inner td:hover {
-    background-color:#f2e5ee;
+    background-color: #f2e5ee;
 }
 
 .inner td.selected {
-    background-color:#ffbce2;
+    background-color: #ffbce2;
+}
+
+
+input {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    outline: none;
+}
+
+input:disabled {
+    background-color: #EEEEEE;
 }
 
 #sudokuPuzzle {
@@ -85,38 +111,16 @@ td.emptyCell {
     -webkit-border-radius: 5px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#formwrapper {
     margin-top: 3em;
 }
 
-#numPad {
-    position: absolute;
-    width: 154px;
-    height: 80px;
-    display: none;
-    background-color: #689fce;
-    -moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -o-border-radius: 20px;
-    -ms-border-radius: 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    z-index: 500;
+#finished {
+    margin-top: 1em;
 }
 
-.padNumbers {
-    text-align: center;
-    padding: 6px;
-    line-height: 40px;
-    font-size: 20px;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#numPad span:hover {
-    color: #e2525f;
-}
 
 footer {
     font: 10px Arial, sans-serif;
